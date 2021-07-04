@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="1afac9c4-ae36-4972-af29-7c1826bb3e1f" Name="2WYSClient" Language="1033" Version="1.0.0.0" Manufacturer="Dakshak Techlabs" UpgradeCode="7151a4d7-186d-4819-a644-0df61ca8d4fa">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of 2WYS is already installed." />
+    <MediaTemplate EmbedCab="yes"/>
+
+    <Feature Id="ProductFeature" Title="2WYSClient" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+      <ComponentRef Id="ApplicationShortcut"/>
+    </Feature>
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="2WYSClient" >
+          <Directory Id="FirstFolder" Name="locales">
+          </Directory>
+        </Directory>
+      </Directory>
+
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="2WYS"/>
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut" Guid="91078674-0116-4962-a656-e6dc9dcc5d45">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+             Name="2WYS Client"
+           Description="What you see is what you Sign"
+            Target="[#AcutesClient.exe]"
+                  WorkingDirectory="INSTALLFOLDER">
+          <Icon Id="MyIconID" SourceFile="icon.ico"></Icon>
+        </Shortcut>
+        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\Dakshak\2WYSClient" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+  </Fragment>
+
+  <Fragment>
+
+    <ComponentGroup Id="ProductComponents">
+      <Component Id="ProductComponent" Directory="INSTALLFOLDER">
+        <File Source="$(var.AcutesClient.TargetPath)" />
+      </Component>
+      <Component Id="itextsharp.dll" Guid="0c2c5172-6c66-4868-89fa-e7d5fae40e67" Directory="INSTALLFOLDER">
+        <File Id="itextsharp.dll" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\itextsharp.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="Fleck.dll" Guid="bc0b7da5-ec40-4843-af82-bd0ad7b9bdff" Directory="INSTALLFOLDER">
+        <File Id="Fleck.dll" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\Fleck.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="Newtonsoft.Json.dll" Guid="6c86af15-026c-4d4a-9531-7f07a82fbe46" Directory="INSTALLFOLDER">
+        <File Id="Newtonsoft.Json.dll" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\Newtonsoft.Json.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="R.DigiSign.dll" Guid="4503a1da-8f1a-4eea-b01a-d7eecb6e5948" Directory="INSTALLFOLDER">
+        <File Id="R.DigiSign.dll" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\R.DigiSign.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="AcutesClient.exe.config" Guid="72b34af9-abbf-415f-86ba-05348eb02caa" Directory="INSTALLFOLDER">
+        <File Id="AcutesClient.exe.config" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\AcutesClient.exe.config" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="CefSharp.Core.dll" Guid="10e42cfd-1c4e-4b5e-afb7-ace29d664397" Directory="INSTALLFOLDER">
+        <File Id="CefSharp.Core.dll" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\CefSharp.Core.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="CefSharp.Wpf.dll" Guid="d4d16a75-666c-4b00-af5c-aeea310837e9" Directory="INSTALLFOLDER">
+        <File Id="CefSharp.Wpf.dll" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\CefSharp.Wpf.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="Microsoft.Expression.Interactions.dll" Guid="f0108e56-8bbe-4bda-b710-269f057af0ab" Directory="INSTALLFOLDER">
+        <File Id="Microsoft.Expression.Interactions.dll" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\Microsoft.Expression.Interactions.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="System.Windows.Interactivity.dll" Guid="a45aad62-803a-407e-acfe-32e1617e954f" Directory="INSTALLFOLDER">
+        <File Id="System.Windows.Interactivity.dll" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\System.Windows.Interactivity.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+
+      <!--</ComponentGroup>-->
+
+      <!--<ComponentGroup Id="ProductComponents1" Directory="INSTALLFOLDER">-->
+
+      <Component Id="cef.pak" Guid="c0741e73-70f3-4dd4-a952-8b8e30512510" Directory="INSTALLFOLDER">
+        <File Id="cef.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\cef.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="CefSharp.BrowserSubprocess.Core.dll" Guid="e90ed023-7d44-41de-8736-6c0ded3199e4" Directory="INSTALLFOLDER">
+        <File Id="CefSharp.BrowserSubprocess.Core.dll" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\CefSharp.BrowserSubprocess.Core.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="CefSharp.BrowserSubprocess.exe" Guid="df50d292-d44a-45aa-8f46-68b31d43c38b" Directory="INSTALLFOLDER">
+        <File Id="CefSharp.BrowserSubprocess.exe" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\CefSharp.BrowserSubprocess.exe" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="CefSharp.Core.xml" Guid="ac05f6c9-c8e7-4ab2-985a-66d940470342" Directory="INSTALLFOLDER">
+        <File Id="CefSharp.Core.xml" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\CefSharp.Core.xml" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="CefSharp.dll" Guid="8adb9581-a4f3-43d0-b277-1f8fb711f945" Directory="INSTALLFOLDER">
+        <File Id="CefSharp.dll" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\CefSharp.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="CefSharp.Wpf.XML" Guid="ce4482f5-f34f-4a67-95fd-704242170224" Directory="INSTALLFOLDER">
+        <File Id="CefSharp.Wpf.XML" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\CefSharp.Wpf.XML" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="CefSharp.XML" Guid="3f1db627-1d4e-4189-b09a-5be479c136cf" Directory="INSTALLFOLDER">
+        <File Id="CefSharp.XML" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\CefSharp.XML" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="cef_100_percent.pak" Guid="fbdc205f-3482-490e-92f7-edfc405480b3" Directory="INSTALLFOLDER">
+        <File Id="cef_100_percent.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\cef_100_percent.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="cef_200_percent.pak" Guid="26365140-e9fd-4e1c-be4d-8bb0ec8a44e1" Directory="INSTALLFOLDER">
+        <File Id="cef_200_percent.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\cef_200_percent.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="cef_extensions.pak" Guid="2410f566-ebbf-46b0-aef0-d5e6ba88d464" Directory="INSTALLFOLDER">
+        <File Id="cef_extensions.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\cef_extensions.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="chrome_elf.dll" Guid="19cdd165-0373-4558-826b-252d82811d95" Directory="INSTALLFOLDER">
+        <File Id="chrome_elf.dll" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\chrome_elf.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="d3dcompiler_47.dll" Guid="37e2d029-44fa-4bbc-839c-76134457962d" Directory="INSTALLFOLDER">
+        <File Id="d3dcompiler_47.dll" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\d3dcompiler_47.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="devtools_resources.pak" Guid="bdcb759e-7c09-4a19-87fa-fdefbf8d49f1" Directory="INSTALLFOLDER">
+        <File Id="devtools_resources.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\devtools_resources.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="icudtl.dat" Guid="16a848b4-1c96-4eb6-83ed-1b98ae4cda77" Directory="INSTALLFOLDER">
+        <File Id="icudtl.dat" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\icudtl.dat" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="libcef.dll" Guid="c381e2b8-a3bf-489d-883f-926e9bcfa2ce" Directory="INSTALLFOLDER">
+        <File Id="libcef.dll" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\libcef.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="libEGL.dll" Guid="34e457a5-d0af-4b43-aa27-be58d7c5c3a5" Directory="INSTALLFOLDER">
+        <File Id="libEGL.dll" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\libEGL.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="libGLESv2.dll" Guid="bf298e16-ffff-4981-b0f3-c1d574478bd8" Directory="INSTALLFOLDER">
+        <File Id="libGLESv2.dll" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\libGLESv2.dll" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="README.txt" Guid="66354609-d041-4c53-83a7-d2cb5ada6e9f" Directory="INSTALLFOLDER">
+        <File Id="README.txt" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\README.txt" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="snapshot_blob.bin" Guid="cb4aee45-e625-44a3-8e3c-23bfab101ca8" Directory="INSTALLFOLDER">
+        <File Id="snapshot_blob.bin" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\snapshot_blob.bin" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="v8_context_snapshot.bin" Guid="5d54985d-cc01-448a-881a-46c4139964e0" Directory="INSTALLFOLDER">
+        <File Id="v8_context_snapshot.bin" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\v8_context_snapshot.bin" KeyPath="yes" Checksum="yes"/>
+      </Component>
+
+      <!--</ComponentGroup>
+
+    <ComponentGroup Id="ProductComponents2" Directory="FirstFolder">-->
+
+      <Component Id="am.pak" Guid="89b0f737-acb7-494d-a533-0e719fdbe302" Directory="FirstFolder">
+        <File Id="am.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\am.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="ar.pak" Guid="c48fe074-c75b-4b7d-b53f-f38892307ab6" Directory="FirstFolder">
+        <File Id="ar.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\ar.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="bg.pak" Guid="3c64d88c-eba0-43b3-aaa6-2e1f156d7d8d" Directory="FirstFolder">
+        <File Id="bg.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\bg.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="bn.pak" Guid="635c6268-696f-4e70-ba39-7524f328a4fd" Directory="FirstFolder">
+        <File Id="bn.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\bn.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="ca.pak" Guid="96971189-63a7-40f8-baf1-e80c3bae4f5f" Directory="FirstFolder">
+        <File Id="ca.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\ca.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="cs.pak" Guid="daa1e1a1-460b-43eb-906c-777f5918f839" Directory="FirstFolder">
+        <File Id="cs.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\cs.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="da.pak" Guid="bacd5b46-7854-4fc7-af9a-a5eed9121e65" Directory="FirstFolder">
+        <File Id="da.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\da.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="de.pak" Guid="fe532841-b3f5-495b-a769-12ebff7bd78a" Directory="FirstFolder">
+        <File Id="de.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\de.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="el.pak" Guid="6b95e48d-0c8a-4d86-93e0-4e4f0d1fdb50" Directory="FirstFolder">
+        <File Id="el.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\el.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="en_GB.pak" Guid="36dcf141-c7ba-489e-825c-d8f84ec59c2a" Directory="FirstFolder">
+        <File Id="en_GB.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\en-GB.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="en_US.pak" Guid="bb3f2c0f-7bed-4752-b2a3-aaa6fff43165" Directory="FirstFolder">
+        <File Id="en_US.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\en-US.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="es_419.pak" Guid="2d500b3a-9207-4ed1-bf65-412f59586a87" Directory="FirstFolder">
+        <File Id="es_419.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\es-419.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="es.pak" Guid="81cb8b31-7432-4da1-a85a-c4786b872291" Directory="FirstFolder">
+        <File Id="es.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\es.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="et.pak" Guid="9a87fda7-ab8b-4423-b67d-49cf68c76776" Directory="FirstFolder">
+        <File Id="et.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\et.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="fa.pak" Guid="29873f94-7fb7-4b08-9319-6dc9f8c18a1e" Directory="FirstFolder">
+        <File Id="fa.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\fa.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="fi.pak" Guid="d0deaf80-e067-4a60-9a9b-a82d71da9ae6" Directory="FirstFolder">
+        <File Id="fi.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\fi.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="fil.pak" Guid="979d3dfb-5541-4c71-bb94-d79068d7261f" Directory="FirstFolder">
+        <File Id="fil.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\fil.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="fr.pak" Guid="01c354fe-4552-4dae-bad1-97b25e8ee285" Directory="FirstFolder">
+        <File Id="fr.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\fr.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="gu.pak" Guid="d3836c80-f339-418a-941b-10fcdc9b5b9f" Directory="FirstFolder">
+        <File Id="gu.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\gu.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="he.pak" Guid="0a427c2e-12fc-4e16-99e0-f6f7fef4f217" Directory="FirstFolder">
+        <File Id="he.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\he.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="hi.pak" Guid="77f4e8b5-d52a-4673-9226-b34886574e71" Directory="FirstFolder">
+        <File Id="hi.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\hi.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="hr.pak" Guid="2e151a57-3d23-4c26-9631-4e6ac10bc1d7" Directory="FirstFolder">
+        <File Id="hr.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\hr.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="hu.pak" Guid="6f9a76ce-55d4-4e2f-b6be-e6cde3506664" Directory="FirstFolder">
+        <File Id="hu.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\hu.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="id.pak" Guid="d2b73eb7-ece5-4151-9a05-2223578ac08e" Directory="FirstFolder">
+        <File Id="id.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\id.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="it.pak" Guid="8b94284e-7993-4ba1-b965-e2a17887cfee" Directory="FirstFolder">
+        <File Id="it.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\it.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="ja.pak" Guid="766c3e33-dd23-45dd-b4d6-0d66db863210" Directory="FirstFolder">
+        <File Id="ja.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\ja.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="kn.pak" Guid="36ba54e9-242f-411f-82c6-d305374d311d" Directory="FirstFolder">
+        <File Id="kn.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\kn.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="ko.pak" Guid="31fb6566-b67e-4155-908a-6eba53d03169" Directory="FirstFolder">
+        <File Id="ko.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\ko.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="lt.pak" Guid="857f5b4a-96da-497f-aa7a-e9372bb9e292" Directory="FirstFolder">
+        <File Id="lt.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\lt.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="lv.pak" Guid="046489fa-8de1-44e5-8f4e-3e17493c226e" Directory="FirstFolder">
+        <File Id="lv.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\lv.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="ml.pak" Guid="2ee4d60e-2d9a-4f31-9891-63658507ffe6" Directory="FirstFolder">
+        <File Id="ml.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\ml.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="mr.pak" Guid="9e19d634-dd8d-4d82-96c5-1e8438074b3e" Directory="FirstFolder">
+        <File Id="mr.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\mr.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="ms.pak" Guid="0bed9bc8-cbd2-4efa-8678-754a79deb355" Directory="FirstFolder">
+        <File Id="ms.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\ms.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="nb.pak" Guid="6b084c21-09e7-42c2-a1a3-2486f233a201" Directory="FirstFolder">
+        <File Id="nb.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\nb.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="nl.pak" Guid="2025abd2-41c4-435f-bb18-4d9dc8a19d59" Directory="FirstFolder">
+        <File Id="nl.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\nl.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="pl.pak" Guid="94cc64bc-0cc4-428b-bab6-7691637e4198" Directory="FirstFolder">
+        <File Id="pl.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\pl.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="pt_BR.pak" Guid="8525ba5f-8da3-43b6-851a-eccd1e876725" Directory="FirstFolder">
+        <File Id="pt_BR.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\pt-BR.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="pt_PT.pak" Guid="951509c8-6a3c-4c1a-a86d-045cdc265729" Directory="FirstFolder">
+        <File Id="pt_PT.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\pt-PT.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="ro.pak" Guid="b312c4a5-6837-479f-9551-675be0e1a946" Directory="FirstFolder">
+        <File Id="ro.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\ro.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="ru.pak" Guid="c666d503-5546-4d3f-b8df-3c52f15dc31a" Directory="FirstFolder">
+        <File Id="ru.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\ru.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="sk.pak" Guid="3118d496-67b4-403a-a3f1-3745eb8c6347" Directory="FirstFolder">
+        <File Id="sk.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\sk.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="sl.pak" Guid="1e266732-26b1-4ece-93a4-8644c4babb0b" Directory="FirstFolder">
+        <File Id="sl.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\sl.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="sr.pak" Guid="0bad1c96-35b3-4ab9-9921-35b2e0aa6a3d" Directory="FirstFolder">
+        <File Id="sr.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\sr.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="sv.pak" Guid="e86b3695-551f-4590-ae94-d68e94f7cdb4" Directory="FirstFolder">
+        <File Id="sv.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\sv.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="sw.pak" Guid="20fe0a66-8dfb-4342-bded-021c78aa3826" Directory="FirstFolder">
+        <File Id="sw.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\sw.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="ta.pak" Guid="d9ff2bd2-78e9-4b02-9396-57ebab70825f" Directory="FirstFolder">
+        <File Id="ta.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\ta.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="te.pak" Guid="347410a5-6587-4a69-8081-a58c159676d5" Directory="FirstFolder">
+        <File Id="te.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\te.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="th.pak" Guid="fa85d381-48f8-488c-9c48-4d4970a85323" Directory="FirstFolder">
+        <File Id="th.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\th.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="tr.pak" Guid="15ea2617-c75a-4b12-8782-401346d66bb5" Directory="FirstFolder">
+        <File Id="tr.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\tr.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="uk.pak" Guid="1b42eb56-3c0f-488a-8e43-90f705721914" Directory="FirstFolder">
+        <File Id="uk.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\uk.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="vi.pak" Guid="b2417661-659a-48fc-ad55-7b40f065def5" Directory="FirstFolder">
+        <File Id="vi.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\vi.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="zh_CN.pak" Guid="e0b3c1bf-76c6-4990-8ee4-a91a46272466" Directory="FirstFolder">
+        <File Id="zh_CN.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\zh-CN.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="zh_TW.pak" Guid="fc492407-364b-425e-8bc2-7e800dc0bb89" Directory="FirstFolder">
+        <File Id="zh_TW.pak" Source="D:\ProjectsGit\dev\2wys-desktop-app\AcutesClient\bin\Debug\x86\locales\zh-TW.pak" KeyPath="yes" Checksum="yes"/>
+      </Component>
+
+    </ComponentGroup>
+  </Fragment>
+</Wix>
